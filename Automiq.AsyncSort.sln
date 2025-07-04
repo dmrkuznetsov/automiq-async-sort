@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Automiq.AsyncSort", "src\Automiq.AsyncSort.Console\Automiq.AsyncSort.Console.csproj", "{4526F189-822F-474D-8CF1-35CB9398EAE7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Automiq.AsyncSort.Core", "src\Automiq.AsyncSort.Core\Automiq.AsyncSort.Core.csproj", "{49039C50-CC69-485C-B4E5-A2A33C979D65}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Automiq.AsyncSort.Tests", "tests\Automiq.AsyncSort.Tests\Automiq.AsyncSort.Tests.csproj", "{1A8E34FA-E18D-4CEC-93E2-1EB54DCFA4FB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4526F189-822F-474D-8CF1-35CB9398EAE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4526F189-822F-474D-8CF1-35CB9398EAE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4526F189-822F-474D-8CF1-35CB9398EAE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4526F189-822F-474D-8CF1-35CB9398EAE7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49039C50-CC69-485C-B4E5-A2A33C979D65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49039C50-CC69-485C-B4E5-A2A33C979D65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49039C50-CC69-485C-B4E5-A2A33C979D65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49039C50-CC69-485C-B4E5-A2A33C979D65}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A8E34FA-E18D-4CEC-93E2-1EB54DCFA4FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A8E34FA-E18D-4CEC-93E2-1EB54DCFA4FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A8E34FA-E18D-4CEC-93E2-1EB54DCFA4FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A8E34FA-E18D-4CEC-93E2-1EB54DCFA4FB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
