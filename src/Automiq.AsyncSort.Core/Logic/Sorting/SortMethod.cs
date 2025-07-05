@@ -6,5 +6,7 @@ public enum SortMethod
     [Description("Стандартный метод сортировки dotnet")]
     DefaultDotnet,
     [Description("Моя реализация Quicksort")]
-    Custom
+    CustomQuickSort,
+    [Description("Моя реализация сортировки подсчетом")]
+    CustomCounting
 }

@@ -1,3 +1,4 @@
+using System.Collections;
 using Automiq.AsyncSort.Core.Helpers;
 using Automiq.AsyncSort.Core.Models;
 
@@ -12,13 +13,27 @@ public static class AbstractObjectSorting
     {
         switch (sortMethod)
         {
-            case SortMethod.Custom:
+            case SortMethod.CustomCounting:
+                CustomCounting(buffer, new ColorComparer(compareOpt));
+                break;
+            case SortMethod.CustomQuickSort:
                 CustomQuickSort(buffer, new AbstractObjectComparer(compareOpt));
                 break;
             case SortMethod.DefaultDotnet:
                 Array.Sort(buffer, new AbstractObjectComparer(compareOpt));
                 break;
         }
+    }
+
+    /// <summary>
+    /// Метод подсчета
+    /// </summary>
+    static void CustomCounting(AbstractObject[] buffer, IComparer<Color> comparer)
+    {
+        var objectsByEnum = buffer
+            .GroupBy(x=>x.Color)
+            .ToDictionary(x=>x.Key, x=>x.Cast<object>().ToArray());
+        BasicHelper.SortObjectsByEnum(buffer, objectsByEnum, comparer);
     }
     
     /// <summary>

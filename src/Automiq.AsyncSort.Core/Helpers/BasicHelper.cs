@@ -41,4 +41,23 @@ public static class BasicHelper
             QuickSortRec(array, comparer, i, rightIndex);
         return array;
     }
+    
+    /// <summary>
+    /// Оптимизированная сортировка для перечисления. Метод подсчета
+    /// </summary>
+    public static void SortObjectsByEnum<T>(object[] objects, Dictionary<T, object[]> objectsByEnum, IComparer<T> comparer) where T : Enum
+    {
+        var values = Enum.GetValues(typeof(T)).Cast<T>().ToArray();
+        Array.Sort(values, comparer);
+        int index = 0;
+        foreach (var v in values)
+        {
+            if(!objectsByEnum.TryGetValue(v, out var objs)) continue;
+            foreach (var o in objs)
+            {
+                objects[index] = o;
+                index++;
+            }
+        }
+    }
 }

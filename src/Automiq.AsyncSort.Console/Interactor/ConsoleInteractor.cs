@@ -34,7 +34,7 @@ public class ConsoleInteractor
     /// <summary>
     /// Максимальный размер буфера
     /// </summary>
-    private const int MaxBufferSize = 100_00;
+    private const int MaxBufferSize = 1_000_000;
     /// <summary>
     /// Минимальный размер буфера
     /// </summary>
