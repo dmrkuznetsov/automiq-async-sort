@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Automiq.AsyncSort.Core.Helpers;
 using Automiq.AsyncSort.Core.Models;
 using Automiq.AsyncSort.Core.Utilities;
@@ -41,7 +42,7 @@ public class SortingRunner
     /// <summary>
     /// Запуск двух тасок с генерацией и сортировкой
     /// </summary>
-    public async Task Start(int objNumber, SortMethod sortMethod, CompareOpt compareOpt)
+    public async Task Start(int objNumber, SortMethod sortMethod, CompareOpt compareOpt, PrintOption printOption)
     {
         var token = _cancellationTokenSource.Token;
         _genTask = new Task(() =>
@@ -62,7 +63,8 @@ public class SortingRunner
                     {
                         _bufferQueue.Enqueue(buffer);
                     }
-                    _logger.Log($"Сгенерированы объекты: {buffer.Select(x=>x.Color.ToString()).Aggregate((x,y)=>$"{x}, {y}")}");
+                    _logger.Log($"Сгенерировано {buffer.Length} объектов");
+                    if(printOption is PrintOption.PrintResults) _logger.Log($"Сгенерированы объекты: {buffer.Select(x=>x.Color.ToString()).Aggregate((x,y)=>$"{x}, {y}")}");
                 }
             }
             catch(Exception ex)
@@ -90,8 +92,12 @@ public class SortingRunner
 
                     if (buffer is not null)
                     {
+                        var watch = new Stopwatch();
+                        watch.Start();
                         AbstractObjectSorting.Sort(buffer, sortMethod, compareOpt);
-                        _logger.Log($"Результат сортировки объектов: {buffer.Select(x=>x.Color.ToString()).Aggregate((x,y)=>$"{x}, {y}")}");
+                        watch.Stop();
+                        _logger.Log($"Сортировка {buffer.Length} объектов была выполнена за {watch.ElapsedMilliseconds} мс");
+                        if(printOption is PrintOption.PrintResults) _logger.Log($"Результат сортировки объектов: {buffer.Select(x=>x.Color.ToString()).Aggregate((x,y)=>$"{x}, {y}")}");
                     }
                 }
             }

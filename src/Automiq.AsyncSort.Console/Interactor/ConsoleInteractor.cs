@@ -39,6 +39,10 @@ public class ConsoleInteractor
     /// Минимальный размер буфера
     /// </summary>
     private const int MinBufferSize = 2;
+    /// <summary>
+    /// Печатать результаты
+    /// </summary>
+    private PrintOption _selectedPrintOption = PrintOption.OnlyElapsedTime;
     #endregion
 
     #region Конструктор
@@ -75,6 +79,7 @@ public class ConsoleInteractor
             case DialogState.BufferSizeSelection: SelectObjBufferSize(); break;
             case DialogState.CompareMethodSelection: SelectCompareMethod(); break;
             case DialogState.SortingMethodSelection: SelectSortMethod(); break;
+            case DialogState.PrintOptionSelection: SelectPrintOption(); break;
             case DialogState.RunnerExecution: await RunSorting(); break;
         }
         //Зацикливаем работу с консолью, чтобы вовращаться на первый шаг
@@ -119,6 +124,19 @@ public class ConsoleInteractor
         if (res.HasValue)
         {
             _selectedSortMethod = res.Value;
+            _currDialogState = DialogState.PrintOptionSelection;
+        }
+    }
+    
+    /// <summary>
+    /// Выбор метода сортировки
+    /// </summary>
+    private void SelectPrintOption()
+    {
+        var res = (PrintOption?)SelectEnumOption<PrintOption>("Какие результаты печатать?");
+        if (res.HasValue)
+        {
+             _selectedPrintOption = res.Value;
             _currDialogState = DialogState.RunnerExecution;
         }
     }
@@ -157,7 +175,7 @@ public class ConsoleInteractor
     private async Task RunSorting()
     {
         _sortingRunner = new SortingRunner(_logger);
-        await _sortingRunner.Start(_selectedBufferSize, _selectedSortMethod, _selectedCompareOpt);
+        await _sortingRunner.Start(_selectedBufferSize, _selectedSortMethod, _selectedCompareOpt, _selectedPrintOption);
         _currDialogState = DialogState.BufferSizeSelection;
         _sortingRunner = null;
     }

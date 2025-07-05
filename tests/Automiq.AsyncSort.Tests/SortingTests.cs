@@ -29,7 +29,7 @@ public class SortingTests
         try
         {
             var runner = new SortingRunner(_logger);
-            var task = runner.Start(10, SortMethod.CustomCounting, CompareOpt.RGB);
+            var task = runner.Start(10, SortMethod.CustomCounting, CompareOpt.RGB, PrintOption.OnlyElapsedTime);
             await Task.Delay(5_000);
             runner.Stop();
             await task;
