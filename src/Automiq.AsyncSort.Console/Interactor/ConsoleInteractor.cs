@@ -27,10 +27,22 @@ public class ConsoleInteractor
     /// Выбранный метод сравнения цветов
     /// </summary>
     private CompareOpt _selectedCompareOpt = CompareOpt.RGB;
+    /// <summary>
+    /// Выбранный метод сортировки
+    /// </summary>
     private SortMethod _selectedSortMethod = SortMethod.DefaultDotnet;
+    /// <summary>
+    /// Раннер, где крутится генерация и сортировка данных
+    /// </summary>
     private SortingRunner _sortingRunner;
-    private Task _handleKeyTask;
-    private CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
+    /// <summary>
+    /// Максимальный размер буфера
+    /// </summary>
+    private const int MaxBufferSize = 100_00;
+    /// <summary>
+    /// Минимальный размер буфера
+    /// </summary>
+    private const int MinBufferSize = 2;
     #endregion
 
     #region Конструктор
@@ -99,11 +111,12 @@ public class ConsoleInteractor
     {
         Console.WriteLine("Выберите размер буфера генерируемых объектов");
         var res = Console.ReadLine();
-        if (!int.TryParse(res, out var intResult) || intResult <= 1 || intResult > 100_000)
+        if (!int.TryParse(res, out var intResult) || intResult < MinBufferSize || intResult > MaxBufferSize)
         {
-            Console.WriteLine("Неверный формат размера буфера: min 2, max 100_000");
+            Console.WriteLine($"Неверный формат размера буфера: int, min : {MinBufferSize}, max : {MaxBufferSize}");
             return;
         }
+        _selectedBufferSize = intResult;
         _currDialogState = DialogState.CompareMethodSelection;
     }
     

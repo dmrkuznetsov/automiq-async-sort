@@ -28,7 +28,6 @@ public class SortingRunner
     /// Лок-объект для синхронизации потоков
     /// </summary>
     private readonly object _lock = new object();
-
     #endregion
 
     #region Конструктор 
@@ -58,7 +57,7 @@ public class SortingRunner
                     Thread.Sleep(1000);
 
                     //Генерация случайных объектов
-                    var buffer = GenerateRandomBuffer(objNumber, sortMethod, compareOpt);
+                    var buffer = GenerateRandomBuffer(objNumber);
                     lock (_lock)
                     {
                         _bufferQueue.Enqueue(buffer);
@@ -110,7 +109,7 @@ public class SortingRunner
     /// <summary>
     /// Генерация случайного буфера
     /// </summary>
-    public AbstractObject[] GenerateRandomBuffer(int objNumber, SortMethod sortMethod, CompareOpt compareOpt)
+    public AbstractObject[] GenerateRandomBuffer(int objNumber)
     {
         Random random = new Random();
         var colors = Enum.GetValues(typeof(Color));
