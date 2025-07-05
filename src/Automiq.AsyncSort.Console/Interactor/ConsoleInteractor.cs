@@ -14,11 +14,7 @@ public class ConsoleInteractor
     /// <summary>
     /// Текущее состояние консольного диалога
     /// </summary>
-    private DialogState _currDialogState = DialogState.GenerationOptionSelection;
-    /// <summary>
-    /// Выбранный метоод генерации объектов
-    /// </summary>
-    private GenerationMethod _selectedGenMethod = GenerationMethod.Random;
+    private DialogState _currDialogState = DialogState.BufferSizeSelection;
     /// <summary>
     /// Выбранный размер буфера генерируемых объектов
     /// </summary>
@@ -76,7 +72,6 @@ public class ConsoleInteractor
     {
         switch (_currDialogState)
         {
-            case DialogState.GenerationOptionSelection: SelectGenerationOption(); break;
             case DialogState.BufferSizeSelection: SelectObjBufferSize(); break;
             case DialogState.CompareMethodSelection: SelectCompareMethod(); break;
             case DialogState.SortingMethodSelection: SelectSortMethod(); break;
@@ -84,24 +79,6 @@ public class ConsoleInteractor
         }
         //Зацикливаем работу с консолью, чтобы вовращаться на первый шаг
         await InvokeCurrentState(); 
-    }
-    
-    /// <summary>
-    /// Выбор способа генерации объектов. Поддержана только случайная генерация.
-    /// </summary>
-    private void SelectGenerationOption()
-    {
-        var res = (GenerationMethod?)SelectEnumOption<GenerationMethod>("Выберите способ генерации объектов");
-        if (res.HasValue)
-        {
-            _selectedGenMethod = res.Value;
-            if (_selectedGenMethod == GenerationMethod.Manual)
-            {
-                Console.WriteLine($"Реализация ручного ввода отсуствует");
-                return;
-            }
-            _currDialogState = DialogState.BufferSizeSelection;
-        }
     }
     
     /// <summary>
@@ -181,7 +158,7 @@ public class ConsoleInteractor
     {
         _sortingRunner = new SortingRunner(_logger);
         await _sortingRunner.Start(_selectedBufferSize, _selectedSortMethod, _selectedCompareOpt);
-        _currDialogState = DialogState.GenerationOptionSelection;
+        _currDialogState = DialogState.BufferSizeSelection;
         _sortingRunner = null;
     }
     #endregion
