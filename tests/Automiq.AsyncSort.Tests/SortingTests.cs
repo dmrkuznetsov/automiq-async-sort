@@ -29,7 +29,7 @@ public class SortingTests
         try
         {
             var runner = new SortingRunner(_logger);
-            var task = runner.Start(10, SortMethod.CustomCounting, CompareOpt.RGB, PrintOption.OnlyElapsedTime);
+            var task = runner.Start(10, SortMethod.CustomSorting, CompareOpt.RGB, PrintOption.OnlyElapsedTime);
             await Task.Delay(5_000);
             runner.Stop();
             await task;
@@ -89,12 +89,12 @@ public class ExampleSortingTestData : IEnumerable<object[]>
     ];
     public IEnumerator<object[]> GetEnumerator()
     {
-        yield return [ _bufferFromExample, SortMethod.CustomCounting, CompareOpt.GBR,  new [] { Color.Green, Color.Blue, Color.Red}];
-        yield return [ _bufferFromExample, SortMethod.CustomCounting, CompareOpt.GRB,  new [] { Color.Green, Color.Red, Color.Blue}];
-        yield return [ _bufferFromExample, SortMethod.CustomCounting, CompareOpt.RGB,  new [] { Color.Red, Color.Green, Color.Blue}];
-        yield return [ _bufferFromExample, SortMethod.CustomCounting, CompareOpt.RBG,  new [] { Color.Red, Color.Blue, Color.Green}];
-        yield return [ _bufferFromExample, SortMethod.CustomCounting, CompareOpt.BGR,  new [] { Color.Blue, Color.Green, Color.Red}];
-        yield return [ _bufferFromExample, SortMethod.CustomCounting, CompareOpt.BRG,  new [] { Color.Blue, Color.Red, Color.Green}];
+        yield return [ _bufferFromExample, SortMethod.CustomSorting, CompareOpt.GBR,  new [] { Color.Green, Color.Blue, Color.Red}];
+        yield return [ _bufferFromExample, SortMethod.CustomSorting, CompareOpt.GRB,  new [] { Color.Green, Color.Red, Color.Blue}];
+        yield return [ _bufferFromExample, SortMethod.CustomSorting, CompareOpt.RGB,  new [] { Color.Red, Color.Green, Color.Blue}];
+        yield return [ _bufferFromExample, SortMethod.CustomSorting, CompareOpt.RBG,  new [] { Color.Red, Color.Blue, Color.Green}];
+        yield return [ _bufferFromExample, SortMethod.CustomSorting, CompareOpt.BGR,  new [] { Color.Blue, Color.Green, Color.Red}];
+        yield return [ _bufferFromExample, SortMethod.CustomSorting, CompareOpt.BRG,  new [] { Color.Blue, Color.Red, Color.Green}];
         
         yield return [ _bufferFromExample, SortMethod.CustomQuickSort, CompareOpt.GBR,  new [] { Color.Green, Color.Blue, Color.Red}];
         yield return [ _bufferFromExample, SortMethod.CustomQuickSort, CompareOpt.GRB,  new [] { Color.Green, Color.Red, Color.Blue}];

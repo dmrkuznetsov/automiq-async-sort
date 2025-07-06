@@ -13,8 +13,8 @@ public static class AbstractObjectSorting
     {
         switch (sortMethod)
         {
-            case SortMethod.CustomCounting:
-                CustomCounting(buffer, new ColorComparer(compareOpt));
+            case SortMethod.CustomSorting:
+                CustomSorting(buffer, new ColorComparer(compareOpt));
                 break;
             case SortMethod.CustomQuickSort:
                 CustomQuickSort(buffer, new AbstractObjectComparer(compareOpt));
@@ -26,9 +26,9 @@ public static class AbstractObjectSorting
     }
 
     /// <summary>
-    /// Метод подсчета
+    /// Кастомный метод сортировки. Оптимальный для задачи
     /// </summary>
-    static void CustomCounting(AbstractObject[] buffer, IComparer<Color> comparer)
+    static void CustomSorting(AbstractObject[] buffer, IComparer<Color> comparer)
     {
         var objectsByEnum = buffer
             .GroupBy(x=>x.Color)

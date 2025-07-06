@@ -43,7 +43,7 @@ public static class BasicHelper
     }
     
     /// <summary>
-    /// Оптимизированная сортировка для перечисления. Метод подсчета
+    /// Оптимизированная сортировка для перечисления
     /// </summary>
     public static void SortObjectsByEnum<T>(object[] objects, Dictionary<T, object[]> objectsByEnum, IComparer<T> comparer) where T : Enum
     {
